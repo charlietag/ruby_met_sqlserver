@@ -37,6 +37,7 @@ ifpowers.connect
 users.sql = %{SELECT LTRIM(RTRIM(MA001)) userid
 FROM [SMARTDSCSYS].[dbo].[DSCMA]
 WHERE MA005 = ''
+ORDER BY MA001
 }
 schools.sql = %{SELECT LTRIM(RTRIM(MB003)) schoolid,LTRIM(RTRIM(MB002)) schoolname
 FROM [SMARTDSCSYS].[dbo].[DSCMB]}
