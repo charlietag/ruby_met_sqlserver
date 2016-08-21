@@ -2,9 +2,9 @@
 require_relative 'lib/app'
 
 #---------Define Filename----------
-# f.realpath
-# f.html_name
-# f.yml_name
+# f.realpatha # /<PATH>/<SCRIPT>.rb
+# f.html_name # /<PATH>/output/<SCRIPT>.html
+# f.yml_name  # /<PATH>/config/database.yml
 f = Filepath.new __FILE__
 #---------Define Filename----------
 
@@ -24,7 +24,7 @@ html_text << "---------------------------------------------------------"
 html_text << "\n"
 
 #==================================================Main Usage===================================================
-#--------------------------------Object--------------------------------
+#--------------------------------Database Object--------------------------------
 users = Sqlserver.new f.yml_name
 schools = Sqlserver.new f.yml_name
 privs = Sqlserver.new f.yml_name
@@ -34,7 +34,7 @@ users.connect
 schools.connect
 privs.connect
 ifpowers.connect
-#--------------------------------Object--------------------------------
+#--------------------------------Database Object--------------------------------
 
 users.sql = %{SELECT LTRIM(RTRIM(MA001)) userid
 FROM [SMARTDSCSYS].[dbo].[DSCMA]
