@@ -1,4 +1,4 @@
-* Filepath.rb
+* filepath.rb
 <pre>
 #--- The Following is replaced with:
 #attr_accessor :to_html_name, :to_yml_name
