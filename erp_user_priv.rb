@@ -1,10 +1,10 @@
 #!/usr/local/bin/ruby
-require 'tiny_tds'
-require 'yaml'
-require_relative 'lib/filepath'
+require_relative 'lib/app'
+
 #---------Define Filename----------
-file = Filepath.new(__FILE__)
-puts file.this_script
+f = Filepath.new __FILE__
+puts f.to_html_name
+puts f.to_yml_name
 exit
 #---------Define Filename----------
 
@@ -14,30 +14,6 @@ time = Time.new
 puts "refresh at: " + time.strftime("%Y-%m-%d %H:%M:%S")
 puts "---------------------------------------------------------"
 #--------------------------------Class--------------------------------
-class Sqlserver
-  #........db info........
-  @@username = ''
-  @@password = ''
-  @@host = ''
-
-  #.........initialize.........
-  attr_accessor :sql
-  def initialize(sql="")
-    @sql = sql
-  end
-
-  #........Database Connection........
-  def connect
-    @client = TinyTds::Client.new username: @@username, password: @@password, host: @@host
-    exit if @client.active? == false
-  end
-
-  #...........Start Query..........
-  def getdata
-    results = @client.execute(@sql)
-  end
-
-end # end of class
 #--------------------------------Class--------------------------------
 
 #==================================================Main Usage===================================================
