@@ -2,27 +2,31 @@
 require_relative 'lib/app'
 
 #---------Define Filename----------
-this_file = Filepath.new __FILE__
-# this_file.to_html_name
-# this_file.to_yml_name
+f = Filepath.new __FILE__
+# f.to_html_name
+# f.to_yml_name
 #---------Define Filename----------
 
+#---------local variable----------
+html_text = ""
+
 time = Time.new
-puts "refresh at: " + time.strftime("%Y-%m-%d %H:%M:%S")
-puts "---------------------------------------------------------"
+html_text << "refresh at: " + time.strftime("%Y-%m-%d %H:%M:%S")
+html_text << "\n"
+html_text << "---------------------------------------------------------"
+html_text << "\n"
 
 #==================================================Main Usage===================================================
 #--------------------------------Object--------------------------------
-users = Sqlserver.new
-schools = Sqlserver.new
-privs = Sqlserver.new
-ifpowers = Sqlserver.new
+users = Sqlserver.new f.to_yml_name
+schools = Sqlserver.new f.to_yml_name
+privs = Sqlserver.new f.to_yml_name
+ifpowers = Sqlserver.new f.to_yml_name
 
 users.connect
 schools.connect
 privs.connect
 ifpowers.connect
-
 #--------------------------------Object--------------------------------
 
 users.sql = %{SELECT LTRIM(RTRIM(MA001)) userid
@@ -35,7 +39,8 @@ FROM [SMARTDSCSYS].[dbo].[DSCMB]}
 all_privs = Array.new
 #.....user loop....
 users.getdata.each do |user|
-  puts "==============#{user['userid']}================"
+  html_text << "==============#{user['userid']}================"
+  html_text << "\n"
   #.....school loop.....
   schools.getdata.each do |school|
     #....if power loop.....
@@ -46,7 +51,8 @@ users.getdata.each do |user|
     }
     ifpowers.getdata.each do |ifpower|
       if ifpower['ifpower'] == 'Y'
-        puts "#{school['schoolname']}:超級使用者"
+        html_text << "#{school['schoolname']}:超級使用者"
+        html_text << "\n"
       else
         #.......privs.......
         all_privs.clear
@@ -57,18 +63,20 @@ users.getdata.each do |user|
         ORDER BY prog
         }
         privs.getdata.each do |priv|
-          #puts "#{school['schoolname']}:#{priv['prog']}"
+          #html_text << "#{school['schoolname']}:#{priv['prog']}"
           all_privs << "#{priv['prog']}"
         end
         if !all_privs.empty?
-          puts "#{school['schoolname']}:"
-          puts all_privs.join(", ")
-          puts
+          html_text << "#{school['schoolname']}:"
+          html_text << "\n"
+          html_text << all_privs.join(", ")
+          html_text << "\n"
         end
       end
     end
   end
-  puts "=================================="
-  puts
+  html_text << "=================================="
+  html_text << "\n"
 end
 #==================================================Main Usage===================================================
+puts html_text
