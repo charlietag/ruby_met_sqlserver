@@ -7,13 +7,7 @@ class Fileopen
 
   def write
     File.open(@output_html, 'w') do |f|
-      if ! f.flock(File::LOCK_EX | File::LOCK_NB)
-        puts "Another instance is already running"
-        exit
-      end
       f.puts @content
-      puts "haha"
-      sleep 10
     end
   end
 end

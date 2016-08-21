@@ -2,10 +2,16 @@
 require_relative 'lib/app'
 
 #---------Define Filename----------
-f = Filepath.new __FILE__
+# f.realpath
 # f.html_name
 # f.yml_name
+f = Filepath.new __FILE__
 #---------Define Filename----------
+
+#---------Script Lock----------
+script = Filelock.new f.realpath
+script.lock
+#---------Script Lock----------
 
 #---------local variable----------
 user_exclude = ["admin", "DS"]
@@ -82,7 +88,8 @@ users.getdata.each do |user|
 end
 #==================================================Main Usage===================================================
 
-# Write to html file
+#------------Write to html file-------------
 fopen = Fileopen.new f.html_name
 fopen.content = html_text
 fopen.write
+#------------Write to html file-------------
