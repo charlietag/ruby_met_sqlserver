@@ -45,19 +45,19 @@ FROM [SMARTDSCSYS].[dbo].[DSCMB]}
 
 all_privs = Array.new
 #.....user loop....
-users.getdata.each do |user|
+users.fetch.each do |user|
   next if user_exclude.include? user['userid'] # exclude array
   html_text << "==============#{user['userid']}================"
   html_text << "\n"
   #.....school loop.....
-  schools.getdata.each do |school|
+  schools.fetch.each do |school|
     #....if power loop.....
     ifpowers.sql = %{
       SELECT LTRIM(RTRIM(MF005)) ifpower
       FROM [#{school['schoolid']}].[dbo].[ADMMF]
       WHERE MF001 = '#{user['userid']}'
     }
-    ifpowers.getdata.each do |ifpower|
+    ifpowers.fetch.each do |ifpower|
       if ifpower['ifpower'] == 'Y'
         html_text << "#{school['schoolname']}:超級使用者"
         html_text << "\n"
@@ -70,7 +70,7 @@ users.getdata.each do |user|
         WHERE MG001 = '#{user['userid']}'
         ORDER BY prog
         }
-        privs.getdata.each do |priv|
+        privs.fetch.each do |priv|
           #html_text << "#{school['schoolname']}:#{priv['prog']}"
           all_privs << "#{priv['prog']}"
         end
@@ -94,6 +94,6 @@ fhtml.content = html_text
 fhtml.write
 #------------Write to html file-------------
 
-#---------Script Lock----------
-script.close
+#---------Script Unlock----------
+script.unlock
 #---------Script Lock----------
