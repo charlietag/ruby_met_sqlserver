@@ -83,7 +83,7 @@ end
 #==================================================Main Usage===================================================
 
 # Write to html file
-write_to_html = Fileopen.new f.to_yml_name
+write_to_html = Fileopen.new f.to_html_name
 write_to_html.html_text = html_text
 write_to_html.writefile
 
