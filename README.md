@@ -12,4 +12,4 @@
   <pre>output/erp_user_priv.html</pre>
   * Execute script
   <pre>chmod 777 erp_user_priv.rb</pre>
-  <pre><PATH>/erp_user_priv.rb</pre>
+  <pre>&lt;PATH&gt;/erp_user_priv.rb</pre>
