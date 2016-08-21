@@ -15,11 +15,10 @@ script.lock
 
 #---------local variable----------
 user_exclude = ["admin", "DS"]
-html_content = ""
-
 time = Time.new
-html_content << "refresh at: " + time.strftime("%Y-%m-%d %H:%M:%S")
-html_content << "<hr>"
+html_content = ""
+#---------local variable----------
+
 
 #==================================================Main Usage===================================================
 #--------------------------------Database Object--------------------------------
@@ -34,6 +33,23 @@ privs.connect
 ifpowers.connect
 #--------------------------------Database Object--------------------------------
 
+#--------------------------------HTML Content--------------------------------
+html_content << "Refresh at: " + time.strftime("%Y-%m-%d %H:%M:%S")
+html_content << "<hr>"
+
+html_content << %{
+  <table class="ui selectable celled table">
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>School</th>
+        <th>Privilege</th>
+      </tr>
+    </thead>
+    <tbody>
+}
+#--------------------------------HTML Content--------------------------------
+
 users.sql = %{SELECT LTRIM(RTRIM(MA001)) userid
 FROM [SMARTDSCSYS].[dbo].[DSCMA]
 WHERE MA005 = ''
@@ -46,19 +62,7 @@ all_privs = Array.new
 #.....user loop....
 users.fetch.each do |user|
   next if user_exclude.include? user['userid'] # exclude array
-  html_content << %{
-    <div class="ui massive label">
-      #{user['userid']}
-    </div>
-    <table class="ui selectable celled table">
-      <thead>
-        <tr>
-          <th>School</th>
-          <th>Privilege</th>
-        </tr>
-      </thead>
-      <tbody>
-  }
+  #html_content << %{#{user['userid']}}
   #.....school loop.....
   schools.fetch.each do |school|
     #....if power loop.....
@@ -71,6 +75,7 @@ users.fetch.each do |user|
       if ifpower['ifpower'] == 'Y'
         html_content << %{
           <tr>
+            <td>#{user['userid']}</td>
             <td>#{school['schoolname']}</td>
             <td>超級使用者</td>
           </tr>
@@ -90,6 +95,7 @@ users.fetch.each do |user|
         if !all_privs.empty?
           html_content << %{
             <tr>
+              <td>#{user['userid']}</td>
               <td>#{school['schoolname']}</td>
               <td>#{all_privs.join(", ")}</td>
             </td>
