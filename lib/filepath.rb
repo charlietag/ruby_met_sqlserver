@@ -1,4 +1,5 @@
 class Filepath
+
   attr_accessor :to_html_name, :to_yml_name
   def initialize(f=__FILE__)
     this_script = File.realpath f # /home/ruby_met_sqlserver/erp_user_priv.rb
@@ -7,16 +8,7 @@ class Filepath
     this_script_basename = File.basename this_script,this_script_ext # erp_user_priv
     
     @to_html_name = this_script_dir + %{/output/} + this_script_basename + %[.html] # erp_user_priv.html
-    @to_yml_name = this_script_dir + %{/config/} + this_script_basename + %[.yml] # erp_user_priv.yml
+    @to_yml_name = this_script_dir + %{/config/} + %[database.yml] # erp_user_priv.yml
   end
 
-  #--- The Following is replaced with attr_accessor
-  #def to_html_name
-  #  @to_html_name
-  #end
-
-  #def to_yml_name
-  #  @to_yml_name
-  #end
-  #--- The Following is replaced with attr_accessor
 end
