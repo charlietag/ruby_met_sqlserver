@@ -65,6 +65,7 @@ users.fetch.each do |user|
   #html_content << %{#{user['userid']}}
   #.....school loop.....
   schools.fetch.each do |school|
+    user_exists = false
     #....if power loop.....
     ifpowers.sql = %{
       SELECT LTRIM(RTRIM(MF005)) ifpower
@@ -72,6 +73,7 @@ users.fetch.each do |user|
       WHERE MF001 = '#{user['userid']}'
     }
     ifpowers.fetch.each do |ifpower|
+      user_exists = true
       if ifpower['ifpower'] == 'Y'
         html_content << %{
           <tr class="warning">
@@ -102,9 +104,9 @@ users.fetch.each do |user|
           }
         #end #uncomment this to fethc data only data exists
       end
-    end
+    end #ifpower
         #-------comment this to fethc data only data exists-------
-        #if !all_privs.empty?
+        if user_exists == false
           html_content << %{
             <tr>
               <td>#{user['userid']}</td>
@@ -112,10 +114,10 @@ users.fetch.each do |user|
               <td></td>
             </td>
           }
-        #end
+        end
         #-------comment this to fethc data only data exists-------
-  end
-end
+  end #school
+end #user
 #--------------------------------HTML Content--------------------------------
   html_content << %{
       </tbody>
