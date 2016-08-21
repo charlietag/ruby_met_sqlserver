@@ -38,7 +38,7 @@ html_content << "Refresh at: " + time.strftime("%Y-%m-%d %H:%M:%S")
 html_content << "<hr>"
 
 html_content << %{
-  <table class="ui selectable celled table">
+  <table class="ui selectable celled table" id="demo">
     <thead>
       <tr>
         <th>User</th>
