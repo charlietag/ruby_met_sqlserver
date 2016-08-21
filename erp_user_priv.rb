@@ -15,13 +15,13 @@ script.lock
 
 #---------local variable----------
 user_exclude = ["admin", "DS"]
-html_text = ""
+html_content = ""
 
 time = Time.new
-html_text << "refresh at: " + time.strftime("%Y-%m-%d %H:%M:%S")
-html_text << "\n"
-html_text << "---------------------------------------------------------"
-html_text << "\n"
+html_content << "refresh at: " + time.strftime("%Y-%m-%d %H:%M:%S")
+html_content << "\n"
+html_content << "---------------------------------------------------------"
+html_content << "\n"
 
 #==================================================Main Usage===================================================
 #--------------------------------Database Object--------------------------------
@@ -47,8 +47,8 @@ all_privs = Array.new
 #.....user loop....
 users.fetch.each do |user|
   next if user_exclude.include? user['userid'] # exclude array
-  html_text << "==============#{user['userid']}================"
-  html_text << "\n"
+  html_content << "==============#{user['userid']}================"
+  html_content << "\n"
   #.....school loop.....
   schools.fetch.each do |school|
     #....if power loop.....
@@ -59,8 +59,8 @@ users.fetch.each do |user|
     }
     ifpowers.fetch.each do |ifpower|
       if ifpower['ifpower'] == 'Y'
-        html_text << "#{school['schoolname']}:超級使用者"
-        html_text << "\n"
+        html_content << "#{school['schoolname']}:超級使用者"
+        html_content << "\n"
       else
         #.......privs.......
         all_privs.clear
@@ -71,26 +71,26 @@ users.fetch.each do |user|
         ORDER BY prog
         }
         privs.fetch.each do |priv|
-          #html_text << "#{school['schoolname']}:#{priv['prog']}"
+          #html_content << "#{school['schoolname']}:#{priv['prog']}"
           all_privs << "#{priv['prog']}"
         end
         if !all_privs.empty?
-          html_text << "#{school['schoolname']}:"
-          html_text << "\n"
-          html_text << all_privs.join(", ")
-          html_text << "\n"
+          html_content << "#{school['schoolname']}:"
+          html_content << "\n"
+          html_content << all_privs.join(", ")
+          html_content << "\n"
         end
       end
     end
   end
-  html_text << "=================================="
-  html_text << "\n"
+  html_content << "=================================="
+  html_content << "\n"
 end
 #==================================================Main Usage===================================================
 
 #------------Write to html file-------------
 fhtml = Fileopen.new f.html_name
-fhtml.content = html_text
+fhtml.content = html_content
 fhtml.write
 #------------Write to html file-------------
 
