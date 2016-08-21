@@ -1,8 +1,10 @@
 #!/usr/local/bin/ruby
 require 'tiny_tds'
 require 'yaml'
-require 'lib/filepath.rb'
+require_relative 'lib/filepath'
 #---------Define Filename----------
+file = Filepath.new(__FILE__)
+puts file.this_script
 exit
 #---------Define Filename----------
 
