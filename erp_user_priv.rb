@@ -93,3 +93,7 @@ fopen = Fileopen.new f.html_name
 fopen.content = html_text
 fopen.write
 #------------Write to html file-------------
+
+#---------Script Lock----------
+script.close
+#---------Script Lock----------
