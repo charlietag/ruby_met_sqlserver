@@ -89,9 +89,9 @@ end
 #==================================================Main Usage===================================================
 
 #------------Write to html file-------------
-fopen = Fileopen.new f.html_name
-fopen.content = html_text
-fopen.write
+fhtml = Fileopen.new f.html_name
+fhtml.content = html_text
+fhtml.write
 #------------Write to html file-------------
 
 #---------Script Lock----------
