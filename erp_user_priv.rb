@@ -92,7 +92,7 @@ users.fetch.each do |user|
         privs.fetch.each do |priv|
           all_privs << "#{priv['prog']}"
         end
-        if !all_privs.empty?
+        #if !all_privs.empty? #uncomment this to fethc data only data exists
           html_content << %{
             <tr>
               <td>#{user['userid']}</td>
@@ -100,9 +100,20 @@ users.fetch.each do |user|
               <td>#{all_privs.join(", ")}</td>
             </td>
           }
-        end
+        #end #uncomment this to fethc data only data exists
       end
     end
+        #-------comment this to fethc data only data exists-------
+        #if !all_privs.empty?
+          html_content << %{
+            <tr>
+              <td>#{user['userid']}</td>
+              <td>#{school['schoolname']}</td>
+              <td></td>
+            </td>
+          }
+        #end
+        #-------comment this to fethc data only data exists-------
   end
 end
 #--------------------------------HTML Content--------------------------------
