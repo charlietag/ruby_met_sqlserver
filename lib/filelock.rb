@@ -12,7 +12,7 @@ class Filelock
     end
   end
 
-  def close
+  def unlock
     @fopen.close
   end
 end

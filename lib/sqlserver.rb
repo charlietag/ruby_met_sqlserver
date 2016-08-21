@@ -15,7 +15,7 @@ class Sqlserver
   end
 
   #...........Start Query..........
-  def getdata
+  def fetch
     results = @client.execute(@sql)
   end
 
