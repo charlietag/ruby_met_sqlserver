@@ -3,8 +3,8 @@ require_relative 'lib/app'
 
 #---------Define Filename----------
 f = Filepath.new __FILE__
-# f.to_html_name
-# f.to_yml_name
+# f.html_name
+# f.yml_name
 #---------Define Filename----------
 
 #---------local variable----------
@@ -19,10 +19,10 @@ html_text << "\n"
 
 #==================================================Main Usage===================================================
 #--------------------------------Object--------------------------------
-users = Sqlserver.new f.to_yml_name
-schools = Sqlserver.new f.to_yml_name
-privs = Sqlserver.new f.to_yml_name
-ifpowers = Sqlserver.new f.to_yml_name
+users = Sqlserver.new f.yml_name
+schools = Sqlserver.new f.yml_name
+privs = Sqlserver.new f.yml_name
+ifpowers = Sqlserver.new f.yml_name
 
 users.connect
 schools.connect
@@ -83,9 +83,6 @@ end
 #==================================================Main Usage===================================================
 
 # Write to html file
-write_to_html = Fileopen.new f.to_html_name
-write_to_html.html_text = html_text
-write_to_html.writefile
-
-
-
+fopen = Fileopen.new f.html_name
+fopen.content = html_text
+fopen.write
