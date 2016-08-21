@@ -1,28 +1,19 @@
 class Fileopen
-  attr_accessor :html_text
+  attr_accessor :content
   def initialize(f="/tmp/erp.html")
     @output_html = f
-    @html_text = ""
+    @content = ""
   end
 
-  def writefile
+  def write
     File.open(@output_html, 'w') do |f|
       if ! f.flock(File::LOCK_EX | File::LOCK_NB)
         puts "Another instance is already running"
         exit
       end
-      f.puts @html_text
+      f.puts @content
+      puts "haha"
+      sleep 10
     end
   end
-  #def iflock(lockfile="")
-  #  exit if lockfile == ""
-  #  f = File.open(lockfile, 'r')
-  #  if ! f.flock(File::LOCK_EX | File::LOCK_NB)
-  #    puts "Another instance is already running"
-  #    exit
-  #  end
-  #  sleep 10
-  #  exit
-  #end
-
 end
