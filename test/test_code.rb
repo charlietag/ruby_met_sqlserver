@@ -1,15 +1,17 @@
 #!/usr/local/bin/ruby
 class Haha
-  def haha mytext
-    @haha = mytext
-  end
+  attr_accessor :mytext
+  #def haha mytext
+  #  @haha = mytext
+  #end
   def sayhello
-    @haha
+    @mytext
   end
 end
 
 f = Haha.new
-f.haha "Man"
+#f.haha "Man"
+f.mytext = "Papa"
 puts f.sayhello
 
 #all_arr = Array.new
