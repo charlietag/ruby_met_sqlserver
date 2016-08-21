@@ -8,6 +8,7 @@ f = Filepath.new __FILE__
 #---------Define Filename----------
 
 #---------local variable----------
+user_exclude = ["admin", "DS"]
 html_text = ""
 
 time = Time.new
@@ -39,6 +40,7 @@ FROM [SMARTDSCSYS].[dbo].[DSCMB]}
 all_privs = Array.new
 #.....user loop....
 users.getdata.each do |user|
+  next if user_exclude.include? user['userid'] # exclude array
   html_text << "==============#{user['userid']}================"
   html_text << "\n"
   #.....school loop.....
@@ -79,4 +81,11 @@ users.getdata.each do |user|
   html_text << "\n"
 end
 #==================================================Main Usage===================================================
-puts html_text
+
+# Write to html file
+write_to_html = Fileopen.new f.to_yml_name
+write_to_html.html_text = html_text
+write_to_html.writefile
+
+
+
