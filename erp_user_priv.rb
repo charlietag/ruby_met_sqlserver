@@ -19,9 +19,7 @@ html_content = ""
 
 time = Time.new
 html_content << "refresh at: " + time.strftime("%Y-%m-%d %H:%M:%S")
-html_content << "\n"
-html_content << "---------------------------------------------------------"
-html_content << "\n"
+html_content << "<hr>"
 
 #==================================================Main Usage===================================================
 #--------------------------------Database Object--------------------------------
@@ -47,8 +45,19 @@ all_privs = Array.new
 #.....user loop....
 users.fetch.each do |user|
   next if user_exclude.include? user['userid'] # exclude array
-  html_content << "==============#{user['userid']}================"
-  html_content << "\n"
+  html_content << %{
+    <div class="ui massive label">
+      #{user['userid']}
+    </div>
+    <table class="ui selectable celled table">
+      <thead>
+        <tr>
+          <th>School</th>
+          <th>Privilege</th>
+        </tr>
+      </thead>
+      <tbody>
+  }
   #.....school loop.....
   schools.fetch.each do |school|
     #....if power loop.....
@@ -59,8 +68,12 @@ users.fetch.each do |user|
     }
     ifpowers.fetch.each do |ifpower|
       if ifpower['ifpower'] == 'Y'
-        html_content << "#{school['schoolname']}:超級使用者"
-        html_content << "\n"
+        html_content << %{
+          <tr>
+            <td>#{school['schoolname']}</td>
+            <td>超級使用者</td>
+          </tr>
+        }
       else
         #.......privs.......
         all_privs.clear
@@ -71,20 +84,23 @@ users.fetch.each do |user|
         ORDER BY prog
         }
         privs.fetch.each do |priv|
-          #html_content << "#{school['schoolname']}:#{priv['prog']}"
           all_privs << "#{priv['prog']}"
         end
         if !all_privs.empty?
-          html_content << "#{school['schoolname']}:"
-          html_content << "\n"
-          html_content << all_privs.join(", ")
-          html_content << "\n"
+          html_content << %{
+            <tr>
+              <td>#{school['schoolname']}</td>
+              <td>#{all_privs.join(", ")}</td>
+            </td>
+          }
         end
       end
     end
   end
-  html_content << "=================================="
-  html_content << "\n"
+  html_content << %{
+      </tbody>
+    </table>
+  }
 end
 #==================================================Main Usage===================================================
 
