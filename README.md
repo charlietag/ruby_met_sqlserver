@@ -5,6 +5,8 @@
 * Prerequisite
   <pre>yum install freetds freetds-devel openssl openssl-libs openssl-devel libticonv-devel -y</pre>
   <pre>bundle install</pre>
+* Ruby Gem
+  <pre>tiny_tds</pre>
 * Usage
   * Config file
   <pre>config/database.yml</pre>
