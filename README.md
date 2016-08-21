@@ -1,3 +1,5 @@
+* Purpose
+  * Connect to sqlserver, and fetch data from sql server with ruby
 * Environment
   * CentOS 7
 * Database
