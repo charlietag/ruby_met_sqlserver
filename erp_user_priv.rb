@@ -74,7 +74,7 @@ users.fetch.each do |user|
     ifpowers.fetch.each do |ifpower|
       if ifpower['ifpower'] == 'Y'
         html_content << %{
-          <tr>
+          <tr class="warning">
             <td>#{user['userid']}</td>
             <td>#{school['schoolname']}</td>
             <td>超級使用者</td>
