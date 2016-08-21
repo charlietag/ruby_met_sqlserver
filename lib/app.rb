@@ -1,2 +1,3 @@
 require_relative 'filepath'
-require_relative 'sqlserver.rb'
+require_relative 'filelock'
+require_relative 'sqlserver'

@@ -2,19 +2,14 @@
 require_relative 'lib/app'
 
 #---------Define Filename----------
-f = Filepath.new __FILE__
-puts f.to_html_name
-puts f.to_yml_name
-exit
+this_file = Filepath.new __FILE__
+# this_file.to_html_name
+# this_file.to_yml_name
 #---------Define Filename----------
 
 time = Time.new
-
-
 puts "refresh at: " + time.strftime("%Y-%m-%d %H:%M:%S")
 puts "---------------------------------------------------------"
-#--------------------------------Class--------------------------------
-#--------------------------------Class--------------------------------
 
 #==================================================Main Usage===================================================
 #--------------------------------Object--------------------------------
