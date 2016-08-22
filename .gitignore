@@ -1,4 +1,4 @@
 *.yml
 *.swp
-/output/*
-!/output/.keep
+/output/
+!*.keep
