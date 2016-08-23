@@ -25,11 +25,13 @@ html_content = ""
 users = Sqlserver.new f.yml_name
 schools = Sqlserver.new f.yml_name
 privs = Sqlserver.new f.yml_name
+system_type = Sqlserver.new f.yml_name
 ifpowers = Sqlserver.new f.yml_name
 
 users.connect
 schools.connect
 privs.connect
+system_type.connect
 ifpowers.connect
 #--------------------------------Database Object--------------------------------
 
@@ -58,7 +60,14 @@ ORDER BY MA001
 schools.sql = %{SELECT LTRIM(RTRIM(MB003)) schoolid,LTRIM(RTRIM(MB002)) schoolname
 FROM [SMARTDSCSYS].[dbo].[DSCMB]}
 
+system_type.sql = %{
+  SELECT LTRIM(RTRIM(MA001)) systemid, LTRIM(RTRIM(MA002)) systemname
+  FROM [SMARTDSCSYS].[dbo].[ADMMA]
+}
+system_type_data = system_type.fetch
+
 all_privs = Array.new
+all_privs_system = Array.new
 #.....user loop....
 users.fetch.each do |user|
   next if user_exclude.include? user['userid'] # exclude array
@@ -85,6 +94,7 @@ users.fetch.each do |user|
       else
         #.......privs.......
         all_privs.clear
+        all_privs_system.clear
         privs.sql = %{
         SELECT distinct LTRIM(RTRIM(SUBSTRING(MG002,1,3))) prog
         FROM [#{school['schoolid']}].[dbo].[ADMMG]
@@ -95,11 +105,21 @@ users.fetch.each do |user|
           all_privs << "#{priv['prog']}"
         end
         #if !all_privs.empty? #uncomment this to fethc data only data exists
+          all_privs_flag = true
+          all_privs.each do |all_priv|
+            system_type_data.each do |data|
+              if data['systemid'] == all_priv
+                all_privs_system << "#{data['systemid']}(#{data['systemname']})"
+                all_privs_flag = false
+              end
+            end
+            all_privs_system << all_priv if all_privs_flag == true
+          end
           html_content << %{
             <tr>
               <td>#{user['userid']}</td>
               <td>#{school['schoolname']}</td>
-              <td>#{all_privs.join(", ")}</td>
+              <td>#{all_privs_system.join(", ")}</td>
             </td>
           }
         #end #uncomment this to fethc data only data exists
