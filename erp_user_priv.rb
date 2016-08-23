@@ -109,11 +109,11 @@ users.fetch.each do |user|
           all_privs.each do |all_priv|
             system_type_data.each do |data|
               if data['systemid'] == all_priv
-                all_privs_system << %{<span class="ui green label">#{data['systemid']}</span>(#{data['systemname']})}
+                all_privs_system << %{<span class="ui purple label">#{data['systemid']}</span>(#{data['systemname']})}
                 all_privs_flag = false
               end
             end
-            all_privs_system << %{<span class="ui green label">#{all_priv}</span>} if all_privs_flag == true
+            all_privs_system << %{<span class="ui purple label">#{all_priv}</span>} if all_privs_flag == true
           end
           html_content << %{
             <tr>
