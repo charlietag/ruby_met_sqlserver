@@ -119,7 +119,7 @@ users.fetch.each do |user|
             <tr>
               <td>#{user['userid']}</td>
               <td>#{school['schoolname']}</td>
-              <td>#{all_privs_system.join(", ")}</td>
+              <td>#{all_privs_system.join(", &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")}</td>
             </td>
           }
         #end #uncomment this to fethc data only data exists
