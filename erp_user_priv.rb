@@ -44,7 +44,7 @@ html_content << %{
     <thead>
       <tr>
         <th>Account</th>
-        <th>Corp</th>
+        <th>Corp.</th>
         <th>Privilege</th>
       </tr>
     </thead>
@@ -88,7 +88,7 @@ users.fetch.each do |user|
           <tr class="warning">
             <td>#{user['userid']}</td>
             <td>#{school['schoolname']}</td>
-            <td>Superuser</td>
+            <td>Super User</td>
           </tr>
         }
       else
