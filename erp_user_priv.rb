@@ -43,9 +43,9 @@ html_content << %{
   <table class="ui selectable celled table" id="demo">
     <thead>
       <tr>
-        <th>使用者</th>
-        <th>公司別</th>
-        <th>權限</th>
+        <th>Account</th>
+        <th>Corp</th>
+        <th>Privilege</th>
       </tr>
     </thead>
     <tbody>
@@ -88,7 +88,7 @@ users.fetch.each do |user|
           <tr class="warning">
             <td>#{user['userid']}</td>
             <td>#{school['schoolname']}</td>
-            <td>超級使用者</td>
+            <td>Superuser</td>
           </tr>
         }
       else
