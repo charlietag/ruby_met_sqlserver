@@ -43,9 +43,9 @@ html_content << %{
   <table class="ui selectable celled table" id="demo">
     <thead>
       <tr>
-        <th>User</th>
-        <th>School</th>
-        <th>Privilege</th>
+        <th>使用者</th>
+        <th>公司別</th>
+        <th>權限</th>
       </tr>
     </thead>
     <tbody>
